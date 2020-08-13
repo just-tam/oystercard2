@@ -40,14 +40,15 @@ describe Oystercard do
     describe '#touch_in' do
       it "Expects touching in to be in a in a journey" do
         subject.touch_in
-        expect{ subject }.to be_in_journey
+        expect(subject).to be_in_journey
       end
     end
 
     describe '#touch_out' do
       it "Expects touching out to not be in a in a journey" do
+        subject.touch_in
         subject.touch_out
-        expect{ subject }.not_to be_in_journey
+        expect(subject).not_to be_in_journey
       end
     end
 end
