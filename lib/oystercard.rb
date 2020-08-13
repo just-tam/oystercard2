@@ -12,4 +12,8 @@ MAX_BALANCE = 90
     fail "The maximum balance is £90" if @balance + amount > MAX_BALANCE
     @balance += amount
   end
+
+  def deduct(amount)
+    @balance -= amount
+  end
 end

@@ -29,7 +29,7 @@ describe Oystercard do
     it "Expects money to be deducted from card" do
       maximum_balance = Oystercard::MAX_BALANCE
       subject.top_up(maximum_balance)
-      expect{ subject.deduct 1 }.to change{ subject.balance }.by 1
+      expect{ subject.deduct 1 }.to change{ subject.balance }.by -1
     end
   end
 end
