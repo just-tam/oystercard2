@@ -19,7 +19,7 @@ MAX_BALANCE = 90
     @in_journey
   end
 
-  def touch_in
+  def touch_in(station)
     fail "You need to top up, mimimum is £1" if @balance < MIN_BALANCE
     @in_journey = true
   end
