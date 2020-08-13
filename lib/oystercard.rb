@@ -15,10 +15,6 @@ MAX_BALANCE = 90
     @balance += amount
   end
 
-  def deduct(amount)
-    @balance -= amount
-  end
-
   def in_journey?
     @in_journey
   end
@@ -29,6 +25,13 @@ MAX_BALANCE = 90
   end
 
   def touch_out
+    deduct(MIN_BALANCE)
     @in_journey = false
+  end
+
+  private
+
+  def deduct(amount)
+    @balance -= amount
   end
 end
