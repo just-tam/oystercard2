@@ -38,21 +38,36 @@ describe Oystercard do
     end
 
     describe '#touch_in' do
-      it "Expects touching in to be in a in a journey" do
-        subject.touch_in
-        expect(subject).to be_in_journey
+
+      context 'card has been touched in with valid balance' do
+        before do
+          subject.top_up(Oystercard::MAX_BALANCE)
+        end
+
+        it "Expects touching in to be in a in a journey" do
+          subject.touch_in
+          expect(subject).to be_in_journey
+        end
       end
 
       it "Expects error if insufficient funds on card" do
         expect{ subject.touch_in }.to raise_error "You need to top up, mimimum is £1"
       end
+      
     end
 
     describe '#touch_out' do
-      it "Expects touching out to not be in a in a journey" do
-        subject.touch_in
-        subject.touch_out
-        expect(subject).not_to be_in_journey
+
+      context 'card has been touched in with valid balance' do
+        before do
+          subject.top_up(Oystercard::MAX_BALANCE)
+        end
+
+        it "Expects touching out to not be in a in a journey" do
+          subject.touch_in
+          subject.touch_out
+          expect(subject).not_to be_in_journey
+        end
       end
     end
 end
