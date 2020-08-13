@@ -32,4 +32,22 @@ describe Oystercard do
       expect{ subject.deduct 1 }.to change{ subject.balance }.by -1
     end
   end
+
+    it "Expects oystercard too respond to in_journey? method" do
+      expect(subject).to respond_to(:in_journey?)
+    end
+
+    describe '#touch_in' do
+      it "Expects touching in to be in a in a journey" do
+        subject.touch_in
+        expect{ subject }.to be_in_journey
+      end
+    end
+
+    describe '#touch_out' do
+      it "Expects touching out to not be in a in a journey" do
+        subject.touch_out
+        expect{ subject }.not_to be_in_journey
+      end
+    end
 end
