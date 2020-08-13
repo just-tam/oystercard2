@@ -9,7 +9,14 @@ describe Oystercard do
     expect(subject.balance).to eq (0)
   end
 
-  it "Expects oystercard to respond to method top_up" do
-    expect(subject).to respond_to(:top_up).with(1).argument
+  describe '#top_up' do
+    it "Expects oystercard to respond to method top_up" do
+      expect(subject).to respond_to(:top_up).with(1).argument
+    end
+
+    it "Expects money to be added to balance" do
+      expect { subject.top_up(1) }.to change{ subject.balance }.by 1
+    end
+
   end
 end
