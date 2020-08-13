@@ -44,7 +44,8 @@ describe Oystercard do
         end
 
         it "Expects oystercard to remember entry station after touching in" do
-          expect(subject.touch_in(station)).to eq (station)
+          subject.touch_in(station)
+          expect(subject.entry_station).to eq (station)
         end
       end
 
