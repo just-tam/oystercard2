@@ -57,6 +57,8 @@ describe Oystercard do
     describe '#touch_out' do
 
       let(:station){ double :station }
+      let(:entry_station) { double :station }
+      let(:exit_station) { double :station }
 
       context 'card has been touched in with valid balance' do
         before do
@@ -65,13 +67,25 @@ describe Oystercard do
 
         it "Expects touching out to not be in a in a journey" do
           subject.touch_in(station)
-          subject.touch_out
+          subject.touch_out(station)
           expect(subject).not_to be_in_journey
         end
 
         it "Expects touching out to deduct fare from card balance" do
           subject.touch_in(station)
-          expect{ subject.touch_out }.to change{ subject.balance }.by -1
+          expect{ subject.touch_out(station) }.to change{ subject.balance }.by -1
+        end
+
+        it "Expects an empty list of journeys" do
+          expect(subject.journeys).to be_empty
+        end
+
+        let(:journey){ {:entry_station => entry_station, :exit_station => exit_station} }
+
+        it "Expects store a journey" do
+          subject.touch_in(entry_station)
+          subject.touch_out(exit_station)
+          expect(subject.journeys).to include journey
         end
       end
     end
