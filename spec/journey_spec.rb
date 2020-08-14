@@ -30,7 +30,7 @@ describe Journey do
   end
 
   it "Expects an empty list of journeys" do
-    expect(subject.journeys).to be_empty
+    expect(subject.journey).to eq nil
   end
 
   let(:journey){ {:entry_station => entry_station, :exit_station => exit_station} }
@@ -40,7 +40,7 @@ describe Journey do
   it "Expects store a journey" do
     subject.start(entry_station)
     subject.finish(exit_station)
-    expect(subject.journeys).to include journey
+    expect(subject.journey).to include journey
   end
 
   it "Expects journey to be complete" do
