@@ -87,6 +87,12 @@ describe Oystercard do
           subject.touch_out(exit_station)
           expect(subject.journeys).to include journey
         end
+
+        it "Expects journey to be complete" do
+          subject.touch_in(entry_station)
+          subject.touch_out(exit_station)
+          expect(subject).to be_journey_complete
+        end
       end
     end
 end

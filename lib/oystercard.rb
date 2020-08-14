@@ -34,6 +34,12 @@ MAX_BALANCE = 90
     @entry_station = nil
   end
 
+  def journey_complete?
+    if @journey
+      true
+    end
+  end
+
   private
 
   def deduct(amount)
