@@ -25,10 +25,6 @@ describe Oystercard do
     end
   end
 
-    it "Expects oystercard too respond to in_journey? method" do
-      expect(subject).to respond_to(:in_journey?)
-    end
-
     describe '#touch_in' do
 
       let(:station){ double :station }
@@ -36,16 +32,6 @@ describe Oystercard do
       context 'card has been touched in with valid balance' do
         before do
           subject.top_up(Oystercard::MAX_BALANCE)
-        end
-
-        it "Expects touching in to be in a in a journey" do
-          subject.touch_in(station)
-          expect(subject).to be_in_journey
-        end
-
-        it "Expects oystercard to remember entry station after touching in" do
-          subject.touch_in(station)
-          expect(subject.entry_station).to eq (station)
         end
       end
 
@@ -65,33 +51,9 @@ describe Oystercard do
           subject.top_up(Oystercard::MAX_BALANCE)
         end
 
-        it "Expects touching out to not be in a in a journey" do
-          subject.touch_in(station)
-          subject.touch_out(station)
-          expect(subject).not_to be_in_journey
-        end
-
         it "Expects touching out to deduct fare from card balance" do
           subject.touch_in(station)
           expect{ subject.touch_out(station) }.to change{ subject.balance }.by -1
-        end
-
-        it "Expects an empty list of journeys" do
-          expect(subject.journeys).to be_empty
-        end
-
-        let(:journey){ {:entry_station => entry_station, :exit_station => exit_station} }
-
-        it "Expects store a journey" do
-          subject.touch_in(entry_station)
-          subject.touch_out(exit_station)
-          expect(subject.journeys).to include journey
-        end
-
-        it "Expects journey to be complete" do
-          subject.touch_in(entry_station)
-          subject.touch_out(exit_station)
-          expect(subject).to be_journey_complete
         end
       end
     end
