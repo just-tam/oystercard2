@@ -1,6 +1,8 @@
+require_relative 'journeylog'
+
 class Journey
 
-attr_reader :entry_station, :exit_station, :journey
+attr_accessor :entry_station, :exit_station, :journey
 
 MIN_FARE = 1
 PENALTY_FARE = 6

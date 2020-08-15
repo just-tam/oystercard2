@@ -5,18 +5,20 @@ class JourneyLog
   attr_reader :journeys
   attr_accessor :journey_class
 
-  def initialize(journey_class: )
+  def initialize
     @journeys = []
     @journey_class = Journey.new
+    @current_journey = nil
   end
 
-  def start
+  def start_journey(station)
     @journey_class.start(station)
   end
 
-  def finish
+  def finish_journey(station)
     @journey_class.finish(station)
-    @current_journey = @journeys << @journey_class.journey
+    @journeys << @journey_class.journey
+    #@current_journey <<  @journey_class.journeys[0][:exit_station]
   end
 
   private
